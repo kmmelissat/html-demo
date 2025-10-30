@@ -20,62 +20,6 @@ const materiasCollection = collection(db, "materias"); // Colección de materias
 const notasCollection = collection(db, "notas"); // Colección de notas
 
 // ============================================
-// 🔍 VERIFICAR SI HAY DATOS
-// ============================================
-async function verificarDatos() {
-  try {
-    // Obtener todos los documentos de la colección "alumnos"
-    const alumnosSnapshot = await getDocs(alumnosCollection);
-
-    // Si está vacía, mostrar mensaje
-    if (alumnosSnapshot.empty) {
-      console.log("⚠️ No hay datos en Firebase");
-      mostrarMensajeSinDatos();
-      return false;
-    }
-    return true;
-  } catch (error) {
-    console.error("Error al verificar datos:", error);
-    return false;
-  }
-}
-
-// Mostrar mensaje cuando no hay datos (solo HTML/CSS)
-function mostrarMensajeSinDatos() {
-  const mensaje = document.createElement("div");
-  mensaje.style.cssText = `
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    background: #fff3cd;
-    border: 2px solid #ffc107;
-    border-radius: 10px;
-    padding: 20px;
-    max-width: 400px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-    z-index: 1000;
-  `;
-  mensaje.innerHTML = `
-    <h3 style="color: #856404; margin-bottom: 10px;">⚠️ Base de datos vacía</h3>
-    <p style="color: #856404; margin-bottom: 15px;">
-      No hay datos en Firebase. Agrega datos manualmente desde Firebase Console.
-    </p>
-    <button onclick="this.parentElement.remove()" style="
-      background: #6c757d;
-      color: white;
-      border: none;
-      padding: 10px 20px;
-      border-radius: 5px;
-      cursor: pointer;
-      font-weight: 600;
-    ">
-      Cerrar
-    </button>
-  `;
-  document.body.appendChild(mensaje);
-}
-
-// ============================================
 // 📖 FUNCIONES PARA LEER DATOS DE FIREBASE
 // ============================================
 
@@ -301,39 +245,9 @@ async function cargarDatos() {
 // Función principal que se ejecuta al cargar la página
 async function init() {
   try {
-    // Verificar si hay datos y cargarlos
-    const hayDatos = await verificarDatos();
-
-    if (hayDatos) {
-      await cargarDatos();
-    }
+    await cargarDatos();
   } catch (error) {
     console.error("Error al inicializar:", error);
-
-    // Mostrar mensaje de error más amigable
-    const errorMsg = document.createElement("div");
-    errorMsg.style.cssText = `
-      position: fixed;
-      top: 20px;
-      right: 20px;
-      background: #f8d7da;
-      border: 2px solid #dc3545;
-      border-radius: 10px;
-      padding: 20px;
-      max-width: 400px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-      z-index: 1000;
-    `;
-    errorMsg.innerHTML = `
-      <h3 style="color: #721c24; margin-bottom: 10px;">❌ Error de conexión</h3>
-      <p style="color: #721c24; margin-bottom: 10px; font-size: 0.9em;">
-        ${error.message || "No se pudo conectar con Firebase"}
-      </p>
-      <p style="color: #721c24; font-size: 0.85em;">
-        Verifica las reglas de Firestore en Firebase Console.
-      </p>
-    `;
-    document.body.appendChild(errorMsg);
   }
 }
 
