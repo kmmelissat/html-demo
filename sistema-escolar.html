@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>📚 Mini Sistema Escolar</title>
+    <link rel="stylesheet" href="sistema-escolar.css" />
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>🎓 Mini Sistema Escolar</h1>
+        <p>Sistema de gestión con múltiples colecciones relacionadas</p>
+      </header>
+
+      <div class="stats">
+        <div class="stat-box">
+          <span class="number" id="totalAlumnos">0</span>
+          <span class="label">Alumnos</span>
+        </div>
+        <div class="stat-box">
+          <span class="number" id="totalMaterias">0</span>
+          <span class="label">Materias</span>
+        </div>
+        <div class="stat-box">
+          <span class="number" id="totalNotas">0</span>
+          <span class="label">Notas Registradas</span>
+        </div>
+        <div class="stat-box">
+          <span class="number" id="promedioGeneral">0</span>
+          <span class="label">Promedio General</span>
+        </div>
+      </div>
+
+      <div class="grid">
+        <!-- Alumnos -->
+        <div class="card">
+          <div class="card-header">
+            <span class="icon">👨‍🎓</span>
+            <h2>Alumnos</h2>
+          </div>
+          <div id="alumnosList" class="data-list">
+            <div class="loading">Cargando alumnos...</div>
+          </div>
+        </div>
+
+        <!-- Materias -->
+        <div class="card">
+          <div class="card-header">
+            <span class="icon">📖</span>
+            <h2>Materias</h2>
+          </div>
+          <div id="materiasList" class="data-list">
+            <div class="loading">Cargando materias...</div>
+          </div>
+        </div>
+
+        <!-- Notas (tabla completa) -->
+        <div class="card full-width">
+          <div class="card-header">
+            <span class="icon">📊</span>
+            <h2>Registro de Notas</h2>
+          </div>
+          <div id="notasContainer">
+            <div class="loading">Cargando notas...</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script type="module" src="sistema-escolar.js"></script>
+  </body>
+</html>
